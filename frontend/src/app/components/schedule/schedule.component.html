@@ -6,35 +6,39 @@
   <h1>Agendar</h1>
 
   <div class="schedule__calendar-box">
-
     <div class="calendar-box__left-side">
-
       <mat-card class="demo-inline-calendar-card">
         <mat-calendar [(selected)]="selected"></mat-calendar>
       </mat-card>
-
     </div>
 
     <div class="calendar-box__right-side">
-        
       <mat-form-field>
         <mat-label>Selecione o cliente</mat-label>
-        <mat-select [(ngModel)]="selectedValue" name="food" required>
-          <mat-option></mat-option>
+        <mat-select [(ngModel)]="selectedValue" name="client" required>
+          <mat-option *ngFor="let client of clients" [value]="client.id">
+            {{ client.name }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Início</mat-label>
-        <input matInput [matTimepicker]="startPicker">
-        <mat-timepicker-toggle matIconSuffix [for]="startPicker"></mat-timepicker-toggle>
+        <input matInput [matTimepicker]="startPicker" />
+        <mat-timepicker-toggle
+          matIconSuffix
+          [for]="startPicker"
+        ></mat-timepicker-toggle>
         <mat-timepicker #startPicker></mat-timepicker>
       </mat-form-field>
-      
+
       <mat-form-field>
         <mat-label>Término</mat-label>
-        <input matInput [matTimepicker]="endPicker">
-        <mat-timepicker-toggle matIconSuffix [for]="endPicker"></mat-timepicker-toggle>
+        <input matInput [matTimepicker]="endPicker" />
+        <mat-timepicker-toggle
+          matIconSuffix
+          [for]="endPicker"
+        ></mat-timepicker-toggle>
         <mat-timepicker #endPicker></mat-timepicker>
       </mat-form-field>
 
