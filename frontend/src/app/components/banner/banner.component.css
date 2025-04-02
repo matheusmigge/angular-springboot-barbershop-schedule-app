@@ -1,0 +1,8 @@
+.container__banner {
+    img {
+        height: 200px;
+        width: 90vw;
+        object-fit: cover;
+        border-radius: 20px;
+    }
+}

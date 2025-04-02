@@ -5,11 +5,14 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { merge } from 'rxjs';
+import { BannerComponent } from "../banner/banner.component";
 
 @Component({
   selector: 'app-new-client',
   imports: [
-    MatInputModule, MatButtonModule, MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule],
+    MatInputModule, MatButtonModule, MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule,
+    BannerComponent
+],
   templateUrl: './new-client.component.html',
   styleUrl: './new-client.component.css'
 })
