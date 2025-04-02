@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { BannerComponent } from "../banner/banner.component";
+import { TableComponent } from '../table/table.component';
 
 @Component({
   selector: 'app-clients-list',
-  imports: [BannerComponent],
+  imports: [BannerComponent, TableComponent],
   templateUrl: './clients-list.component.html',
   styleUrl: './clients-list.component.css'
 })
