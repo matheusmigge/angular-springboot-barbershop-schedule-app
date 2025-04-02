@@ -1,0 +1,48 @@
+<div class="container__schedule">
+  <app-banner
+    imgURL="https://i.pinimg.com/736x/96/58/bf/9658bf0d5f88fcd27009908a7b4fce5f.jpg"
+  />
+
+  <h1>Agendar</h1>
+
+  <div class="schedule__calendar-box">
+
+    <div class="calendar-box__left-side">
+
+      <mat-card class="demo-inline-calendar-card">
+        <mat-calendar [(selected)]="selected"></mat-calendar>
+      </mat-card>
+
+    </div>
+
+    <div class="calendar-box__right-side">
+        
+      <mat-form-field>
+        <mat-label>Selecione o cliente</mat-label>
+        <mat-select [(ngModel)]="selectedValue" name="food" required>
+          <mat-option></mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Início</mat-label>
+        <input matInput [matTimepicker]="startPicker">
+        <mat-timepicker-toggle matIconSuffix [for]="startPicker"></mat-timepicker-toggle>
+        <mat-timepicker #startPicker></mat-timepicker>
+      </mat-form-field>
+      
+      <mat-form-field>
+        <mat-label>Término</mat-label>
+        <input matInput [matTimepicker]="endPicker">
+        <mat-timepicker-toggle matIconSuffix [for]="endPicker"></mat-timepicker-toggle>
+        <mat-timepicker #endPicker></mat-timepicker>
+      </mat-form-field>
+
+      <button mat-raised-button>Salvar</button>
+    </div>
+  </div>
+
+  <h1>Agendamentos</h1>
+
+  <app-table></app-table>
+</div>
