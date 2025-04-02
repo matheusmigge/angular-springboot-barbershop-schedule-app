@@ -1,0 +1,28 @@
+.container__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #027361;
+  padding: 30px 50px;
+
+  .logo {
+    height: 70px;
+  }
+
+  .header__links {
+    ul {
+      display: flex;
+      gap: 20px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      color: #ffffff;
+      font-size: 30px;
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+    }
+  }
+}
