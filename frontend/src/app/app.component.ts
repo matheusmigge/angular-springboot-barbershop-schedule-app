@@ -1,16 +1,37 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { RouterOutlet, ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { HeaderComponent } from "./components/header/header.component";
-import { NewClientComponent } from "./components/new-client/new-client.component";
-import { ClientsListComponent } from "./components/clients-list/clients-list.component";
-import { ScheduleComponent } from "./components/schedule/schedule.component";
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, NewClientComponent, ClientsListComponent, ScheduleComponent],
+  imports: [RouterOutlet, HeaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  title = 'frontend';
+export class AppComponent implements OnInit {
+
+  constructor(
+    private titleService: Title,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) { }
+
+  ngOnInit(): void {
+    this.router.events
+      .pipe(
+        filter(event => event instanceof NavigationEnd),
+        map(() => {
+          let route = this.activatedRoute;
+          while (route.firstChild) {
+            route = route.firstChild;
+          }
+          return route.snapshot.data['title'] || 'Default Title';
+        })
+      )
+      .subscribe((pageTitle: string) => {
+        this.titleService.setTitle(pageTitle);
+      });
+  }
 }
