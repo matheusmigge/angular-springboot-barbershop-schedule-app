@@ -1,0 +1,32 @@
+.container__new-client {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 50px;
+    color: #ffffff;
+
+    .new-client__banner {
+        height: 200px;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 20px;
+    }
+
+    .new-client__form {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        gap: 10px;
+    }
+
+    .mat-mdc-raised-button {
+        margin-top: -10px;
+        color: #ffffff;
+        background-color: #027361;
+        width: 50%;
+        height: 50px;
+
+        font-size: 20px;
+    }
+}

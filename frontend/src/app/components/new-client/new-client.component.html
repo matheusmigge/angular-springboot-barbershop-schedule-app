@@ -1,0 +1,46 @@
+<div class="container__new-client">
+  <img
+    class="new-client__banner"
+    src="https://roar.com.br/wp-content/uploads/2021/01/5-melhores-Ideias-de-promocao-para-barbearia-1.jpg"
+  />
+
+  <h1>Cadastro</h1>
+
+  <div class="new-client__form">
+    <mat-form-field>
+      <mat-label>Nome</mat-label>
+      <input matInput [formControl]="name" required />
+      @if (name.invalid) {
+      <mat-error>{{ getNameErrorMessage() }}</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>E-mail</mat-label>
+      <input
+        matInput
+        placeholder="exemplo@exemplo.com"
+        [formControl]="email"
+        (blur)="updateErrorMessage()"
+        required
+      />
+      @if (email.invalid) {
+      <mat-error>{{ errorMessage() }}</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Celular</mat-label>
+      <input
+        matInput
+        placeholder="(XX) XXXXX-XXXX"
+        [formControl]="phone"
+        (blur)="phone.markAsTouched()"
+      />
+
+      @if (phone.invalid && phone.touched) {
+      <mat-error>{{ getPhoneErrorMessage() }}</mat-error>
+      }
+    </mat-form-field>
+  </div>
+
+  <button mat-raised-button>Salvar</button>
+</div>
