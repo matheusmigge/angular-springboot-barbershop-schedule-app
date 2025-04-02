@@ -1,14 +1,32 @@
 [
-    {
-      "id": 1,
-      "name": "John Doe",
-      "email": "john.doe@example.com",
-      "phone": "123-456-7890"
-    },
-    {
-      "id": 2,
-      "name": "Jane Smith",
-      "email": "jane.smith@example.com",
-      "phone": "987-654-3210"
-    }
-  ]
+  {
+    "id": 1,
+    "name": "Carlos Silva",
+    "email": "carlos.silva@example.com",
+    "phone": "(11) 98765-4321"
+  },
+  {
+    "id": 2,
+    "name": "Ana Souza",
+    "email": "ana.souza@example.com",
+    "phone": "(21) 97654-3210"
+  },
+  {
+    "id": 3,
+    "name": "Mariana Oliveira",
+    "email": "mariana.oliveira@example.com",
+    "phone": "(31) 98547-2580"
+  },
+  {
+    "id": 4,
+    "name": "Rafael Santos",
+    "email": "rafael.santos@example.com",
+    "phone": "(41) 99852-1470"
+  },
+  {
+    "id": 5,
+    "name": "Juliana Ferreira",
+    "email": "juliana.ferreira@example.com",
+    "phone": "(51) 97412-3658"
+  }
+]
