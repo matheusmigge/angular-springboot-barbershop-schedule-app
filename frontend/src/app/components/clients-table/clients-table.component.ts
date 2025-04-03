@@ -6,6 +6,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { HttpClient } from '@angular/common/http';
 import { Client } from '../../models/client.models';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-table',
@@ -31,7 +32,7 @@ export class TableComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
 
-    this.http.get<Client[]>('/assets/data/clients.json').subscribe(data => {
+    this.http.get<Client[]>(`${environment.apiUrl}/clients`).subscribe(data => {
       this.dataSource.data = data;
     });
   }
