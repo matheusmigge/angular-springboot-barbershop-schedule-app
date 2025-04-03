@@ -5,17 +5,8 @@ import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { HttpClient } from '@angular/common/http';
+import { Client } from '../../models/client.models';
 
-export interface Client {
-  id: number;
-  name: string;
-  email: string;
-  phone: string;
-}
-
-/**
- * @title Data table with sorting, pagination, and filtering.
- */
 @Component({
   selector: 'app-table',
   styleUrl: './clients-table.component.css',

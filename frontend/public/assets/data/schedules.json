@@ -1,0 +1,46 @@
+[
+    {
+      "id": 1,
+      "client": {
+        "id": 1,
+        "name": "Carlos Silva",
+        "email": "carlos.silva@example.com",
+        "phone": "+55 11 91234-5678"
+      },
+      "startAt": "2025-04-02T09:00:00",
+      "endAt": "2025-04-02T10:00:00"
+    },
+    {
+      "id": 2,
+      "client": {
+        "id": 2,
+        "name": "Fernanda Oliveira",
+        "email": "fernanda.oliveira@example.com",
+        "phone": "+55 21 99876-5432"
+      },
+      "startAt": "2025-04-02T10:30:00",
+      "endAt": "2025-04-02T11:30:00"
+    },
+    {
+      "id": 3,
+      "client": {
+        "id": 3,
+        "name": "João Pereira",
+        "email": "joao.pereira@example.com",
+        "phone": "+55 31 98765-4321"
+      },
+      "startAt": "2025-04-02T13:00:00",
+      "endAt": "2025-04-02T14:00:00"
+    },
+    {
+      "id": 4,
+      "client": {
+        "id": 4,
+        "name": "Mariana Santos",
+        "email": "mariana.santos@example.com",
+        "phone": "+55 41 91234-5678"
+      },
+      "startAt": "2025-04-02T15:00:00",
+      "endAt": "2025-04-02T16:00:00"
+    }
+  ]

@@ -12,6 +12,7 @@ import { FormControl, FormsModule, Validators } from '@angular/forms';
 import { MatTimepickerModule } from '@angular/material/timepicker';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { SchedulesTableComponent } from "../schedules-table/schedules-table.component";
 
 export interface Client {
   id: number;
@@ -22,7 +23,7 @@ export interface Client {
 
 @Component({
   selector: 'app-schedule',
-  imports: [CommonModule, BannerComponent, TableComponent, MatCardModule, MatDatepickerModule, FormsModule, MatFormFieldModule, MatSelectModule, MatInputModule, MatTimepickerModule, MatButtonModule],
+  imports: [CommonModule, BannerComponent, TableComponent, MatCardModule, MatDatepickerModule, FormsModule, MatFormFieldModule, MatSelectModule, MatInputModule, MatTimepickerModule, MatButtonModule, SchedulesTableComponent],
   templateUrl: './schedule.component.html',
   styleUrl: './schedule.component.css',
   providers: [provideNativeDateAdapter()],
