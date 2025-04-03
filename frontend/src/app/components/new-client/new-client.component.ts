@@ -6,29 +6,29 @@ import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { merge } from 'rxjs';
 import { BannerComponent } from "../banner/banner.component";
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-new-client',
   imports: [
     MatInputModule, MatButtonModule, MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule,
     BannerComponent
-],
+  ],
   templateUrl: './new-client.component.html',
   styleUrl: './new-client.component.css'
 })
 export class NewClientComponent {
   readonly name = new FormControl('', [Validators.required]);
-
   readonly email = new FormControl('', [Validators.required, Validators.email]);
-
-  phone = new FormControl('', [
+  readonly phone = new FormControl('', [
     Validators.required,
     Validators.pattern(/^\(\d{2}\) \d{5}-\d{4}$/)
   ]);
 
   errorMessage = signal('');
 
-  constructor() {
+  constructor(private http: HttpClient) {
     merge(this.email.statusChanges, this.email.valueChanges)
       .pipe(takeUntilDestroyed())
       .subscribe(() => this.updateErrorMessage());
@@ -53,5 +53,22 @@ export class NewClientComponent {
     if (this.phone.hasError('required')) return 'O número é obrigatório';
     if (this.phone.hasError('pattern')) return 'O número de estar no formato (XX) XXXXX-XXXX';
     return '';
+  }
+
+  saveClient(): void {
+    if (this.name.valid && this.email.valid && this.phone.valid) {
+      const newClient = {
+        name: this.name.value,
+        email: this.email.value,
+        phone: this.phone.value
+      };
+
+      this.http.post(`${environment.apiUrl}/clients`, newClient).subscribe({
+        next: () => alert('Cliente cadastrado com sucesso!'),
+        error: () => alert('Erro ao cadastrar cliente.')
+      });
+    } else {
+      alert('Por favor, preencha todos os campos corretamente.');
+    }
   }
 }

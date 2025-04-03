@@ -23,7 +23,7 @@ export interface Client {
 
 @Component({
   selector: 'app-schedule',
-  imports: [CommonModule, BannerComponent, TableComponent, MatCardModule, MatDatepickerModule, FormsModule, MatFormFieldModule, MatSelectModule, MatInputModule, MatTimepickerModule, MatButtonModule, SchedulesTableComponent],
+  imports: [CommonModule, BannerComponent, MatCardModule, MatDatepickerModule, FormsModule, MatFormFieldModule, MatSelectModule, MatInputModule, MatTimepickerModule, MatButtonModule, SchedulesTableComponent],
   templateUrl: './schedule.component.html',
   styleUrl: './schedule.component.css',
   providers: [provideNativeDateAdapter()],
