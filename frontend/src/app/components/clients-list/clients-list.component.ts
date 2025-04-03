@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BannerComponent } from "../banner/banner.component";
-import { TableComponent } from '../table/table.component';
+import { TableComponent } from '../clients-table/clients-table.component';
 
 @Component({
   selector: 'app-clients-list',

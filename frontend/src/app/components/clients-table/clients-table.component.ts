@@ -18,8 +18,8 @@ export interface Client {
  */
 @Component({
   selector: 'app-table',
-  styleUrl: './table.component.css',
-  templateUrl: './table.component.html',
+  styleUrl: './clients-table.component.css',
+  templateUrl: './clients-table.component.html',
   imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule],
 })
 export class TableComponent implements AfterViewInit {

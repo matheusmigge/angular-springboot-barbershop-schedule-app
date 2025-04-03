@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, model } from '@angular/core';
 import { BannerComponent } from "../banner/banner.component";
-import { TableComponent } from "../table/table.component";
+import { TableComponent } from "../clients-table/clients-table.component";
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
