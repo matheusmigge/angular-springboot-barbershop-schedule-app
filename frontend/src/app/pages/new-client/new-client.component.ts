@@ -5,7 +5,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { merge } from 'rxjs';
-import { BannerComponent } from "../banner/banner.component";
+import { BannerComponent } from "../../components/banner/banner.component";
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 

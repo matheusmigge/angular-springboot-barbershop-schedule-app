@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, model } from '@angular/core';
-import { BannerComponent } from "../banner/banner.component";
+import { BannerComponent } from "../../components/banner/banner.component";
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -11,7 +11,7 @@ import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { MatTimepickerModule } from '@angular/material/timepicker';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { SchedulesTableComponent } from "../schedules-table/schedules-table.component";
+import { SchedulesTableComponent } from "../../components/tables/schedules-table/schedules-table.component";
 import { environment } from '../../../environments/environment';
 import { Client } from '../../models/client.models';
 
@@ -20,7 +20,7 @@ import { Client } from '../../models/client.models';
   imports: [CommonModule, BannerComponent, MatCardModule, MatDatepickerModule, FormsModule, MatFormFieldModule, MatSelectModule, MatInputModule, MatTimepickerModule, MatButtonModule, SchedulesTableComponent, ReactiveFormsModule],
   templateUrl: './schedule.component.html',
   styleUrl: './schedule.component.css',
-  providers: [provideNativeDateAdapter(), {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'}],
+  providers: [provideNativeDateAdapter(), { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScheduleComponent {
@@ -43,7 +43,7 @@ export class ScheduleComponent {
     if (this.selected && this.startTime.valid && this.endTime.valid && this.selectedValue) {
       const startAt = new Date(this.selected);
       const endAt = new Date(this.selected);
-      
+
       startAt.setHours(this.startTime.value!.getHours(), this.startTime.value!.getMinutes(), 0, 0);
       endAt.setHours(this.endTime.value!.getHours(), this.endTime.value!.getMinutes(), 0, 0);
 
