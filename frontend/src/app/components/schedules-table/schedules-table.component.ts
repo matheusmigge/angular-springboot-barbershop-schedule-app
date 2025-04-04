@@ -7,6 +7,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { HttpClient } from '@angular/common/http';
 import { Schedule } from '../../models/schedule.models';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-schedules-table',
@@ -32,7 +33,7 @@ export class SchedulesTableComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
 
-    this.http.get<Schedule[]>('/assets/data/schedules.json').subscribe(data => {
+    this.http.get<Schedule[]>(`${environment.apiUrl}/schedules`).subscribe(data => {
       this.dataSource.data = data;
     });
 
