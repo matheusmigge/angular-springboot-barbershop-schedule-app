@@ -8,32 +8,61 @@
   <div class="schedule__calendar-box">
     <div class="calendar-box__left-side">
       <mat-card class="demo-inline-calendar-card">
-        <mat-calendar [(selected)]="selected"></mat-calendar>
+        <mat-calendar [(selected)]="calendarDate"></mat-calendar>
       </mat-card>
     </div>
 
     <div class="calendar-box__right-side">
       <mat-form-field>
         <mat-label>Selecione o cliente</mat-label>
-        <mat-select [(ngModel)]="selectedValue" name="client" required>
+        <mat-select [formControl]="clientId" required>
           <mat-option *ngFor="let client of clients" [value]="client.id">
             {{ client.name }}
           </mat-option>
         </mat-select>
+        <mat-error *ngIf="clientId.invalid">{{
+          getClientErrorMessage()
+        }}</mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Início</mat-label>
-        <input matInput [formControl]="startTime" [matTimepicker]="startPicker" />
-        <mat-timepicker-toggle matIconSuffix [for]="startPicker"></mat-timepicker-toggle>
+        <input
+          matInput
+          [formControl]="startTime"
+          [matTimepicker]="startPicker"
+          [matTimepickerMin]="getTimeFormatted(openingTime.hours, openingTime.minutes)"
+          [matTimepickerMax]="getTimeFormatted(closingTime.hours, closingTime.minutes)"
+          required
+        />
+        <mat-timepicker-toggle
+          matIconSuffix
+          [for]="startPicker"
+        ></mat-timepicker-toggle>
         <mat-timepicker #startPicker></mat-timepicker>
+        <mat-error *ngIf="startTime.invalid">{{
+          getTimeErrorMessage(startTime)
+        }}</mat-error>
       </mat-form-field>
-      
+
       <mat-form-field>
         <mat-label>Término</mat-label>
-        <input matInput [formControl]="endTime" [matTimepicker]="endPicker" />
-        <mat-timepicker-toggle matIconSuffix [for]="endPicker"></mat-timepicker-toggle>
+        <input
+          matInput
+          [formControl]="endTime"
+          [matTimepicker]="endPicker"
+          [matTimepickerMin]="getTimeFormatted(openingTime.hours, openingTime.minutes)"
+          [matTimepickerMax]="getTimeFormatted(closingTime.hours, closingTime.minutes)"
+          required
+        />
+        <mat-timepicker-toggle
+          matIconSuffix
+          [for]="endPicker"
+        ></mat-timepicker-toggle>
         <mat-timepicker #endPicker></mat-timepicker>
+        <mat-error *ngIf="endTime.invalid">{{
+          getTimeErrorMessage(endTime)
+        }}</mat-error>
       </mat-form-field>
 
       <button mat-raised-button (click)="saveSchedule()">Salvar</button>

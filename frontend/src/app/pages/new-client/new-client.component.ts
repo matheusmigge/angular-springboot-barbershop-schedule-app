@@ -28,25 +28,21 @@ export class NewClientComponent {
 
   errorMessage = signal('');
 
-  constructor(private http: HttpClient) {
-    merge(this.email.statusChanges, this.email.valueChanges)
-      .pipe(takeUntilDestroyed())
-      .subscribe(() => this.updateErrorMessage());
-  }
-
-  updateErrorMessage() {
-    if (this.email.hasError('required')) {
-      this.errorMessage.set('Preenchimento obrigatório');
-    } else if (this.email.hasError('mail')) {
-      this.errorMessage.set('E-mail inválido');
-    } else {
-      this.errorMessage.set('');
-    }
-  }
+  constructor(private http: HttpClient) {}
 
   getNameErrorMessage() {
     if (this.name.hasError('required')) return 'O nome é obrigatório';
     return '';
+  }
+
+  getEmailErrorMessage() {
+    if (this.email.hasError('required')) {
+      this.errorMessage.set('Preenchimento obrigatório');
+    } else if (this.email.hasError('email')) {
+      this.errorMessage.set('E-mail inválido');
+    } else {
+      this.errorMessage.set('');
+    }
   }
 
   getPhoneErrorMessage() {
@@ -68,7 +64,7 @@ export class NewClientComponent {
         error: () => alert('Erro ao cadastrar cliente.')
       });
     } else {
-      alert('Por favor, preencha todos os campos corretamente.');
+      alert('Por favor, revise todos os campos e tente novamente.');
     }
   }
 }

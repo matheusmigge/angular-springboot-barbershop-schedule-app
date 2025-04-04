@@ -17,7 +17,7 @@
         matInput
         placeholder="exemplo@exemplo.com"
         [formControl]="email"
-        (blur)="updateErrorMessage()"
+        (blur)="getEmailErrorMessage()"
         required
       />
       @if (email.invalid) {
