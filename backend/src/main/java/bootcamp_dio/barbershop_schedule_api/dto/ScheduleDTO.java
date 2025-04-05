@@ -1,6 +1,7 @@
 package bootcamp_dio.barbershop_schedule_api.dto;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 import bootcamp_dio.barbershop_schedule_api.model.Client;
 import bootcamp_dio.barbershop_schedule_api.model.Schedule;
@@ -16,8 +17,8 @@ public class ScheduleDTO {
 
     private Long id;
     private ClientDTO client;
-    private LocalDateTime startAt;
-    private LocalDateTime endAt;
+    private OffsetDateTime startAt;
+    private OffsetDateTime endAt;
 
     public ScheduleDTO(Schedule schedule, ClientRepository clientRepository) {
         this.id = schedule.getId();

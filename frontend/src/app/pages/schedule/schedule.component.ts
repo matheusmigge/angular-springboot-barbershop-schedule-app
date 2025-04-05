@@ -145,8 +145,8 @@ export class ScheduleComponent {
 
       const scheduleData = {
         clientId: this.clientId.value,
-        startAt: startAt.toISOString(),
-        endAt: endAt.toISOString()
+      startAt: startAt.toISOString(), // Envia como UTC
+      endAt: endAt.toISOString(),     // Envia como UTC
       };
 
       if (this.scheduleId) {

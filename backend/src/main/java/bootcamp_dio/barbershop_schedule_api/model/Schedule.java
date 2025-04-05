@@ -1,6 +1,6 @@
 package bootcamp_dio.barbershop_schedule_api.model;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,6 +24,6 @@ public class Schedule {
     @Column(name = "client_id", nullable = false)
     private Long clientId;
 
-    private LocalDateTime startAt;
-    private LocalDateTime endAt;
+    private OffsetDateTime startAt;
+    private OffsetDateTime endAt;
 }
