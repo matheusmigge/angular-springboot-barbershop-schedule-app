@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatIconModule } from '@angular/material/icon';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
@@ -12,10 +13,10 @@ import { environment } from '../../../../environments/environment';
   selector: 'app-table',
   styleUrl: './clients-table.component.css',
   templateUrl: './clients-table.component.html',
-  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule],
+  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, MatIconModule],
 })
 export class TableComponent implements AfterViewInit {
-  displayedColumns: string[] = ['id', 'name', 'email', 'phone'];
+  displayedColumns: string[] = ['id', 'name', 'email', 'phone', 'actions'];
   dataSource: MatTableDataSource<Client>;
 
   @ViewChild(MatPaginator)
