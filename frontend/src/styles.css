@@ -9,6 +9,10 @@
   font-family: "League Spartan", sans-serif;
 }
 
+h1 {
+  font-size: 3em;
+}
+
 body {
   background-color: #171717;
 }

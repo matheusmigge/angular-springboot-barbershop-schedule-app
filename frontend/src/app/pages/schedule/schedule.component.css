@@ -1,17 +1,18 @@
 .container__schedule {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
 
   .schedule__calendar-box {
     display: flex;
     justify-content: center;
     width: 90vw;
+    max-width: 1000px;
     gap: 30px;
 
     .calendar-box__left-side {
-        width: 30%;
+      width: 30%;
 
       .demo-inline-calendar-card {
         width: 100%;
@@ -19,18 +20,37 @@
     }
 
     .calendar-box__right-side {
-        display: flex;
-        flex-direction: column;
+      display: flex;
+      flex-direction: column;
 
+      .mat-mdc-raised-button {
+        color: #ffffff;
+        background-color: #027361;
+        width: 100%;
+        height: 50px;
 
-        .mat-mdc-raised-button {
-            color: #ffffff;
-            background-color: #027361;
-            width: 100%;
-            height: 50px;
-    
-            font-size: 20px;
-        }
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .container__schedule {
+    .schedule__calendar-box {
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+
+      .calendar-box__left-side {
+        width: 100%;
+        max-width: 350px;
+      }
+
+      .calendar-box__right-side {
+        width: 100%;
+        max-width: 350px;
+      }
     }
   }
 }

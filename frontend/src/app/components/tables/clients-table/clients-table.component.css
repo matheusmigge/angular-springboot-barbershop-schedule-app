@@ -1,6 +1,6 @@
 .container__table {
-
   width: 90vw;
+  max-width: 1000px;
 
   table {
     width: 100%;
@@ -20,10 +20,20 @@
       padding: 20px;
       font-family: 40px;
     };
+
+    .mat-mdc-cell {
+      text-wrap: nowrap;
+    };
   }
   .mat-mdc-form-field {
     font-size: 14px;
     width: 100%;
   };
+
+  @media (max-width: 768px) {
+    .mat-elevation-z8 {
+      overflow-x: auto;
+    }
+  }
 }
 

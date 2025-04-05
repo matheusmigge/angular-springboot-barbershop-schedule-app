@@ -1,29 +1,39 @@
 .container__schedules-table {
-    width: 90vw;
-    table {
-      width: 100%;
-      .update-button, .delete-button {
-        background-color: #027361;
-        color: #ffffff;
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-        border-radius: 20px;
-        padding: 5px;
-        margin-right: 5px;
-        border: none;
-        cursor: pointer;
-      };
+  width: 90vw;
+  max-width: 1000px;
+  table {
+    width: 100%;
+    .update-button,
+    .delete-button {
+      background-color: #027361;
+      color: #ffffff;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 20px;
+      padding: 5px;
+      margin-right: 5px;
+      border: none;
+      cursor: pointer;
+    };
 
-      .mat-cell {
-        color: #000000;
-        padding: 20px;
-        font-family: 40px;
-      };
-    }
-    
-    .mat-mdc-form-field {
-      font-size: 14px;
-      width: 100%;
+    .mat-cell {
+      color: #000000;
+      padding: 20px;
+      font-family: 40px;
+    };
+
+    .mat-mdc-cell {
+      text-wrap: nowrap;
     };
   }
-  
-  
+
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .mat-elevation-z8 {
+    overflow-x: auto;
+  }
+}
