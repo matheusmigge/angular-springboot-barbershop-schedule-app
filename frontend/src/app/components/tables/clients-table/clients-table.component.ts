@@ -32,8 +32,11 @@ export class TableComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.loadClients();
+  }
 
-    this.http.get<Client[]>(`${environment.apiUrl}/clients`).subscribe(data => {
+  loadClients() {
+    this.http.get<Client[]>(`${environment.apiUrl}/clients`).subscribe((data) => {
       this.dataSource.data = data;
     });
   }
@@ -44,6 +47,20 @@ export class TableComponent implements AfterViewInit {
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
+    }
+  }
+
+  deleteClient(client: Client) {
+    if (confirm(`Tem certeza de que deseja excluir o cliente "${client.name}"?`)) {
+      this.http.delete(`${environment.apiUrl}/clients/${client.id}`).subscribe({
+        next: () => {
+          alert('Cliente excluído com sucesso!');
+          this.loadClients();
+        },
+        error: () => {
+          alert('Erro ao excluir o cliente.');
+        },
+      });
     }
   }
 }
