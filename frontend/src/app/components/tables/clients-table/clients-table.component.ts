@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { HttpClient } from '@angular/common/http';
 import { Client } from '../../../models/client.models';
 import { environment } from '../../../../environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-table',
@@ -24,7 +25,7 @@ export class TableComponent implements AfterViewInit {
   @ViewChild(MatSort)
   sort!: MatSort;
 
-  constructor(private http: HttpClient) {
+  constructor(private router: Router, private http: HttpClient) {
 
     this.dataSource = new MatTableDataSource<Client>([]);
   }
@@ -41,13 +42,8 @@ export class TableComponent implements AfterViewInit {
     });
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+  updateClient(client: any): void {
+    this.router.navigate(['/new-client', client.id]);
   }
 
   deleteClient(client: Client) {
@@ -61,6 +57,15 @@ export class TableComponent implements AfterViewInit {
           alert('Erro ao excluir o cliente.');
         },
       });
+    }
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
     }
   }
 }
