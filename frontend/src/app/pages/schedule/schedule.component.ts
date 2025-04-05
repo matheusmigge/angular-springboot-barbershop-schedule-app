@@ -17,6 +17,7 @@ import { Client } from '../../models/client.models';
 import { ScheduleService } from '../../services/schedule.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Schedule } from '../../models/schedule.models';
+import { ScheduleFilterService } from '../../services/schedule-filter.service';
 
 @Component({
   selector: 'app-schedule',
@@ -42,7 +43,8 @@ export class ScheduleComponent {
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
-    private scheduleService: ScheduleService
+    private scheduleService: ScheduleService,
+    private scheduleFilterService: ScheduleFilterService
   ) {
   }
 
@@ -57,6 +59,11 @@ export class ScheduleComponent {
     this.http.get<Client[]>(`${environment.apiUrl}/clients`).subscribe((data) => {
       this.clients = data;
     });
+  }
+
+  onDateChange(date: Date | null): void {
+    this.calendarDate = date;
+    this.scheduleFilterService.updateSelectedDate(date);
   }
 
   loadScheduleData(id: number): void {   

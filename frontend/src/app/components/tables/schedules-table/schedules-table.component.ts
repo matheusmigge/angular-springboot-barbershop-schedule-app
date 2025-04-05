@@ -10,6 +10,7 @@ import { Schedule } from '../../../models/schedule.models';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../../../environments/environment';
 import { ScheduleService } from '../../../services/schedule.service';
+import { ScheduleFilterService } from '../../../services/schedule-filter.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -21,13 +22,14 @@ import { Router } from '@angular/router';
 export class SchedulesTableComponent implements AfterViewInit {
   displayedColumns: string[] = ['name', 'phone', 'startAt', 'endAt', 'actions'];
   dataSource: MatTableDataSource<Schedule>;
+  allSchedules: Schedule[] = [];
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort)
   sort!: MatSort;
 
-  constructor(private http: HttpClient, private scheduleService: ScheduleService, private router: Router) {
+  constructor(private http: HttpClient, private scheduleService: ScheduleService, private scheduleFilterService: ScheduleFilterService, private router: Router) {
     this.dataSource = new MatTableDataSource<Schedule>([]);
   }
 
@@ -36,6 +38,14 @@ export class SchedulesTableComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
 
     this.loadSchedules();
+
+    this.scheduleFilterService.selectedDate$.subscribe((date) => {
+      if (date) {
+        this.filterSchedulesByDate(date);
+      } else {
+        this.dataSource.data = this.allSchedules;
+      }
+    });
 
     this.scheduleService.refreshTable$.subscribe(() => {
       this.loadSchedules();
@@ -52,9 +62,18 @@ export class SchedulesTableComponent implements AfterViewInit {
     };
   }
 
+  filterSchedulesByDate(date: Date): void {
+    const formattedDate = date.toISOString().split('T')[0]; // Formata a data como YYYY-MM-DD
+    this.dataSource.data = this.allSchedules.filter((schedule) => {
+      const scheduleDate = new Date(schedule.startAt).toISOString().split('T')[0];
+      return scheduleDate === formattedDate; // Filtra os agendamentos pela data
+    });
+  }
+
   loadSchedules(): void {
     this.http.get<Schedule[]>(`${environment.apiUrl}/schedules`).subscribe((data) => {
-      this.dataSource.data = data;
+      this.allSchedules = data;
+      this.dataSource.data = data; 
     });
   }
 

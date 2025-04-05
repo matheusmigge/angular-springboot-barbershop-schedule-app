@@ -3,12 +3,15 @@
     imgURL="https://i.pinimg.com/736x/96/58/bf/9658bf0d5f88fcd27009908a7b4fce5f.jpg"
   />
 
-  <h1>{{ scheduleId ? 'Editar Agendamento' : 'Agendar' }}</h1>
+  <h1>{{ scheduleId ? "Editar Agendamento" : "Agendar" }}</h1>
 
   <div class="schedule__calendar-box">
     <div class="calendar-box__left-side">
       <mat-card class="demo-inline-calendar-card">
-        <mat-calendar [(selected)]="calendarDate"></mat-calendar>
+        <mat-calendar
+          [(selected)]="calendarDate"
+          (selectedChange)="onDateChange($event)"
+        ></mat-calendar>
       </mat-card>
     </div>
 
@@ -31,8 +34,12 @@
           matInput
           [formControl]="startTime"
           [matTimepicker]="startPicker"
-          [matTimepickerMin]="getTimeFormatted(openingTime.hours, openingTime.minutes)"
-          [matTimepickerMax]="getTimeFormatted(closingTime.hours, closingTime.minutes)"
+          [matTimepickerMin]="
+            getTimeFormatted(openingTime.hours, openingTime.minutes)
+          "
+          [matTimepickerMax]="
+            getTimeFormatted(closingTime.hours, closingTime.minutes)
+          "
           required
         />
         <mat-timepicker-toggle
@@ -51,8 +58,12 @@
           matInput
           [formControl]="endTime"
           [matTimepicker]="endPicker"
-          [matTimepickerMin]="getTimeFormatted(openingTime.hours, openingTime.minutes)"
-          [matTimepickerMax]="getTimeFormatted(closingTime.hours, closingTime.minutes)"
+          [matTimepickerMin]="
+            getTimeFormatted(openingTime.hours, openingTime.minutes)
+          "
+          [matTimepickerMax]="
+            getTimeFormatted(closingTime.hours, closingTime.minutes)
+          "
           required
         />
         <mat-timepicker-toggle
