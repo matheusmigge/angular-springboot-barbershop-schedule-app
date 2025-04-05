@@ -22,4 +22,21 @@ public class ScheduleService {
     public Schedule createSchedule(Schedule schedule) {
         return scheduleRepository.save(schedule);
     }
+
+    public Schedule updateSchedule(Long id, Schedule schedule) {
+        return scheduleRepository.findById(id).map(existingSchedule -> {
+            existingSchedule.setStartAt(schedule.getStartAt());
+            existingSchedule.setEndAt(schedule.getEndAt());
+            existingSchedule.setClientId(schedule.getClientId());
+            return scheduleRepository.save(existingSchedule);
+        }).orElseThrow(() -> new RuntimeException("Agendamento não encontrado com o ID: " + id));
+    }
+
+    public void deleteSchedule(Long id) {
+        if (scheduleRepository.existsById(id)) {
+            scheduleRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Agendamento não encontrado com o ID: " + id);
+        }
+    }
 }
