@@ -7,12 +7,14 @@ import { BannerComponent } from "../../components/banner/banner.component";
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PhoneMaskDirective } from '../../directives/phone-mask.directive';
+
 
 @Component({
   selector: 'app-new-client',
   imports: [
     MatInputModule, MatButtonModule, MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule,
-    BannerComponent
+    BannerComponent,PhoneMaskDirective
   ],
   templateUrl: './new-client.component.html',
   styleUrl: './new-client.component.css'
