@@ -8,5 +8,6 @@ export const routes: Routes = [
     { path: 'new-client/:id', component: NewClientComponent, data: { title: 'Editar cliente' }  },
     { path: 'clients/list', component: ClientsComponent, data: { title: 'Clientes cadastrados' } },
     { path: 'schedules', component: ScheduleComponent, data: { title: 'Agendamentos' } },
+    { path: 'schedule/:id', component: ScheduleComponent, data: { title: 'Editar agendamento' }  },
     { path: '**', redirectTo: 'schedules' }
 ];

@@ -15,6 +15,8 @@ import { SchedulesTableComponent } from "../../components/tables/schedules-table
 import { environment } from '../../../environments/environment';
 import { Client } from '../../models/client.models';
 import { ScheduleService } from '../../services/schedule.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Schedule } from '../../models/schedule.models';
 
 @Component({
   selector: 'app-schedule',
@@ -31,16 +33,38 @@ export class ScheduleComponent {
   startTime = new FormControl<Date | null>(null, [Validators.required]);
   endTime = new FormControl<Date | null>(null, [Validators.required]);
   formControl = new FormControl<Date | null>(null);
+  scheduleId: number | null = null;
 
   readonly openingTime = { hours: 8, minutes: 0 };
   readonly closingTime = { hours: 18, minutes: 0 };
 
-  constructor(private http: HttpClient, private scheduleService: ScheduleService) {
+  constructor(
+    private http: HttpClient,
+    private route: ActivatedRoute,
+    private router: Router,
+    private scheduleService: ScheduleService
+  ) {
   }
 
   ngOnInit(): void {
-    this.http.get<Client[]>(`${environment.apiUrl}/clients`).subscribe(data => {
+    this.route.params.subscribe((params) => {
+      if (params['id']) {
+        this.scheduleId = +params['id'];
+        this.loadScheduleData(this.scheduleId);
+      }
+    });
+
+    this.http.get<Client[]>(`${environment.apiUrl}/clients`).subscribe((data) => {
       this.clients = data;
+    });
+  }
+
+  loadScheduleData(id: number): void {   
+    this.http.get<Schedule>(`${environment.apiUrl}/schedules/${id}`).subscribe((schedule) => {
+      this.clientId.setValue(schedule.client.id);
+      this.calendarDate = new Date(schedule.startAt);
+      this.startTime.setValue(new Date(schedule.startAt));
+      this.endTime.setValue(new Date(schedule.endAt));
     });
   }
 
@@ -94,6 +118,7 @@ export class ScheduleComponent {
       alert(
         `O horário de início deve estar entre ${this.openingTime.hours.toString().padStart(2, '0')}:${this.openingTime.minutes.toString().padStart(2, '0')} e ${this.closingTime.hours.toString().padStart(2, '0')}:${this.closingTime.minutes.toString().padStart(2, '0')}.`
       );
+      console.log(this.startTime.value);
       return;
     }
 
@@ -101,6 +126,8 @@ export class ScheduleComponent {
       alert(
         `O horário de término deve estar entre ${this.openingTime.hours.toString().padStart(2, '0')}:${this.openingTime.minutes.toString().padStart(2, '0')} e ${this.closingTime.hours.toString().padStart(2, '0')}:${this.closingTime.minutes.toString().padStart(2, '0')}.`
       );
+      console.log(this.endTime.value);
+      
       return;
     }
 
@@ -116,21 +143,41 @@ export class ScheduleComponent {
       startAt.setHours(this.startTime.value!.getHours(), this.startTime.value!.getMinutes(), 0, 0);
       endAt.setHours(this.endTime.value!.getHours(), this.endTime.value!.getMinutes(), 0, 0);
 
-      const newSchedule = {
+      const scheduleData = {
         clientId: this.clientId.value,
         startAt: startAt.toISOString(),
         endAt: endAt.toISOString()
       };
 
-      this.http.post(`${environment.apiUrl}/schedules`, newSchedule).subscribe({
-        next: () => {
-          alert('Agendamento salvo com sucesso!');
-          this.scheduleService.notifyTableRefresh();
-        },
-        error: () => alert('Erro ao salvar o agendamento.')
-      });
+      if (this.scheduleId) {
+        this.http.put(`${environment.apiUrl}/schedules/${this.scheduleId}`, scheduleData).subscribe({
+          next: () => {
+            alert('Agendamento atualizado com sucesso!');
+            this.scheduleService.notifyTableRefresh();
+            this.router.navigate(['/schedules']);
+          },
+          error: () => alert('Erro ao atualizar o agendamento.'),
+        });
+      } else {
+        this.http.post(`${environment.apiUrl}/schedules`, scheduleData).subscribe({
+          next: () => {
+            alert('Agendamento salvo com sucesso!');
+            this.scheduleService.notifyTableRefresh();
+            this.clearForm();
+          },
+          error: () => alert('Erro ao salvar o agendamento.'),
+        });
+      }
     } else {
       alert('Por favor, preencha todos os campos corretamente.');
     }
+  }
+
+  clearForm(): void {
+    this.clientId.reset(null);
+    this.calendarDate = null;
+    this.startTime.reset(null);
+    this.endTime.reset(null);
+    this.scheduleId = null; 
   }
 }

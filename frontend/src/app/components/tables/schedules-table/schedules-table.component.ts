@@ -10,6 +10,7 @@ import { Schedule } from '../../../models/schedule.models';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../../../environments/environment';
 import { ScheduleService } from '../../../services/schedule.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-schedules-table',
@@ -26,7 +27,7 @@ export class SchedulesTableComponent implements AfterViewInit {
   @ViewChild(MatSort)
   sort!: MatSort;
 
-  constructor(private http: HttpClient, private scheduleService: ScheduleService) {
+  constructor(private http: HttpClient, private scheduleService: ScheduleService, private router: Router) {
     this.dataSource = new MatTableDataSource<Schedule>([]);
   }
 
@@ -55,6 +56,10 @@ export class SchedulesTableComponent implements AfterViewInit {
     this.http.get<Schedule[]>(`${environment.apiUrl}/schedules`).subscribe((data) => {
       this.dataSource.data = data;
     });
+  }
+
+  editSchedule(schedule: Schedule): void {
+    this.router.navigate(['/schedule', schedule.id]);
   }
 
   applyFilter(event: Event) {
