@@ -57,6 +57,24 @@ export class SchedulesTableComponent implements AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
-} {
 
+  refreshTable(): void {
+    this.http.get<Schedule[]>(`${environment.apiUrl}/schedules`).subscribe(data => {
+      this.dataSource.data = data;
+    });
+  }
+
+  deleteSchedule(schedule: Schedule): void {
+    if (confirm(`Tem certeza de que deseja excluir o agendamento de ${schedule.client.name}?`)) {
+      this.http.delete(`${environment.apiUrl}/schedules/${schedule.id}`).subscribe({
+        next: () => {
+          alert('Agendamento excluído com sucesso!');
+          this.refreshTable();
+        },
+        error: () => {
+          alert('Erro ao excluir o agendamento.');
+        },
+      });
+    }
+  }
 }

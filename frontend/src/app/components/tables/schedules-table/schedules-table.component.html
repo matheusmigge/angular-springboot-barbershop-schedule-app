@@ -38,11 +38,22 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Ações</th>
         <td mat-cell *matCellDef="let schedule">
-          <button mat-mini-fab extended matTooltip="excluir" class="delete-button">
+          <button
+            mat-mini-fab
+            extended
+            matTooltip="excluir"
+            class="delete-button"
+            (click)="deleteSchedule(schedule)"
+          >
             <mat-icon>delete</mat-icon>
           </button>
 
-          <button mat-mini-fab extended matTooltip="atualizar" class="delete-button">
+          <button
+            mat-mini-fab
+            extended
+            matTooltip="atualizar"
+            class="delete-button"
+          >
             <mat-icon>edit</mat-icon>
           </button>
         </td>
