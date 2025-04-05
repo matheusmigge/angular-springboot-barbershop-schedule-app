@@ -1,6 +1,4 @@
 package bootcamp_dio.barbershop_schedule_api.dto;
-
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 import bootcamp_dio.barbershop_schedule_api.model.Client;
