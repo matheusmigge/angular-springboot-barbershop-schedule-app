@@ -103,8 +103,8 @@ export class ScheduleComponent {
       return;
     }
 
-    if (this.startTime.value && this.endTime.value && this.endTime.value < this.startTime.value) {
-      alert('O horário de término não pode ser anterior ao horário de início.');
+    if (this.startTime.value && this.endTime.value && this.endTime.value <= this.startTime.value) {
+      alert('O horário de término não pode ser anterior ou igual ao horário de início.');
       return;
     }
 
