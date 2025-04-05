@@ -4,6 +4,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { HttpClient } from '@angular/common/http';
 import { Schedule } from '../../../models/schedule.models';
 import { CommonModule } from '@angular/common';
@@ -11,12 +12,12 @@ import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-schedules-table',
-  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, CommonModule],
+  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule,MatIconModule, CommonModule],
   templateUrl: './schedules-table.component.html',
   styleUrl: './schedules-table.component.css'
 })
 export class SchedulesTableComponent implements AfterViewInit {
-  displayedColumns: string[] = ['name', 'phone', 'startAt', 'endAt'];
+  displayedColumns: string[] = ['name', 'phone', 'startAt', 'endAt', 'actions'];
   dataSource: MatTableDataSource<Schedule>;
 
   @ViewChild(MatPaginator)
