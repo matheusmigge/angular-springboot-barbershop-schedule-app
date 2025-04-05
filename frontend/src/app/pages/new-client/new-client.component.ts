@@ -1,10 +1,8 @@
 import { Component, signal } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { merge } from 'rxjs';
 import { BannerComponent } from "../../components/banner/banner.component";
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
@@ -88,6 +86,7 @@ export class NewClientComponent {
         this.http.put(`${environment.apiUrl}/clients/${this.clientId}`, clientData).subscribe({
           next: () => {
             alert('Cliente atualizado com sucesso!');
+            this.clearForm();
             this.router.navigate(['/clients/list']);
           },
           error: () => alert('Erro ao atualizar cliente.'),
@@ -96,7 +95,7 @@ export class NewClientComponent {
         this.http.post(`${environment.apiUrl}/clients`, clientData).subscribe({
           next: () => {
             alert('Cliente cadastrado com sucesso!');
-            this.router.navigate(['/clients/list']);
+            this.clearForm();
           },
           error: () => alert('Erro ao cadastrar cliente.'),
         });
@@ -104,5 +103,12 @@ export class NewClientComponent {
     } else {
       alert('Por favor, revise todos os campos e tente novamente.');
     }
+  }
+
+  clearForm(): void {
+    this.name.reset();
+    this.email.reset();
+    this.phone.reset(); 
+    this.clientId = null; 
   }
 }
