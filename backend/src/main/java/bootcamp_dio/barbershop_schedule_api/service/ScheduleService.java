@@ -19,6 +19,11 @@ public class ScheduleService {
         return scheduleRepository.findAll();
     }
 
+    public Schedule getScheduleById(Long id) {
+        return scheduleRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Agendamento não encontrado com o ID: " + id));
+    }
+
     public Schedule createSchedule(Schedule schedule) {
         return scheduleRepository.save(schedule);
     }

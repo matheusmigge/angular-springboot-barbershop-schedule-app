@@ -20,6 +20,11 @@ public class ClientService {
         return clientRepository.findAll();
     }
 
+    public Client getClientById(Long id) {
+        return clientRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Cliente não encontrado com o ID: " + id));
+    }
+
     public Client createClient(Client client) {
         return clientRepository.save(client);
     }

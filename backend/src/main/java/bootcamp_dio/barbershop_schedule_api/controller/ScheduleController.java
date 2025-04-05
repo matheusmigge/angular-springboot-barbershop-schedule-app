@@ -37,6 +37,12 @@ public class ScheduleController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping("/{id}")
+    public ScheduleDTO getScheduleById(@PathVariable Long id) {
+        Schedule schedule = scheduleService.getScheduleById(id);
+        return new ScheduleDTO(schedule, clientRepository);
+    }
+
     @PostMapping
     public Schedule createSchedule(@RequestBody Schedule schedule) {
         return scheduleService.createSchedule(schedule);
