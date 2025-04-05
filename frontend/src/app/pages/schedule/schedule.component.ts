@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 import { SchedulesTableComponent } from "../../components/tables/schedules-table/schedules-table.component";
 import { environment } from '../../../environments/environment';
 import { Client } from '../../models/client.models';
+import { ScheduleService } from '../../services/schedule.service';
 
 @Component({
   selector: 'app-schedule',
@@ -34,7 +35,7 @@ export class ScheduleComponent {
   readonly openingTime = { hours: 8, minutes: 0 };
   readonly closingTime = { hours: 18, minutes: 0 };
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private scheduleService: ScheduleService) {
   }
 
   ngOnInit(): void {
@@ -44,7 +45,7 @@ export class ScheduleComponent {
   }
 
   getTimeFormatted(hours: number, minutes: number): string {
-    return `${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}`;
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
   }
 
   getClientErrorMessage(): string {
@@ -88,14 +89,14 @@ export class ScheduleComponent {
       alert('Por favor, selecione uma data no calendário.');
       return;
     }
-  
+
     if (!this.isTimeWithinRange(this.startTime.value)) {
       alert(
         `O horário de início deve estar entre ${this.openingTime.hours.toString().padStart(2, '0')}:${this.openingTime.minutes.toString().padStart(2, '0')} e ${this.closingTime.hours.toString().padStart(2, '0')}:${this.closingTime.minutes.toString().padStart(2, '0')}.`
       );
       return;
     }
-    
+
     if (!this.isTimeWithinRange(this.endTime.value)) {
       alert(
         `O horário de término deve estar entre ${this.openingTime.hours.toString().padStart(2, '0')}:${this.openingTime.minutes.toString().padStart(2, '0')} e ${this.closingTime.hours.toString().padStart(2, '0')}:${this.closingTime.minutes.toString().padStart(2, '0')}.`
@@ -122,7 +123,10 @@ export class ScheduleComponent {
       };
 
       this.http.post(`${environment.apiUrl}/schedules`, newSchedule).subscribe({
-        next: () => alert('Agendamento salvo com sucesso!'),
+        next: () => {
+          alert('Agendamento salvo com sucesso!');
+          this.scheduleService.notifyTableRefresh();
+        },
         error: () => alert('Erro ao salvar o agendamento.')
       });
     } else {

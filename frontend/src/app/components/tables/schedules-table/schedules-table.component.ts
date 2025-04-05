@@ -9,10 +9,11 @@ import { HttpClient } from '@angular/common/http';
 import { Schedule } from '../../../models/schedule.models';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../../../environments/environment';
+import { ScheduleService } from '../../../services/schedule.service';
 
 @Component({
   selector: 'app-schedules-table',
-  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule,MatIconModule, CommonModule],
+  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, MatIconModule, CommonModule],
   templateUrl: './schedules-table.component.html',
   styleUrl: './schedules-table.component.css'
 })
@@ -25,17 +26,18 @@ export class SchedulesTableComponent implements AfterViewInit {
   @ViewChild(MatSort)
   sort!: MatSort;
 
-  constructor(private http: HttpClient) {
-
+  constructor(private http: HttpClient, private scheduleService: ScheduleService) {
     this.dataSource = new MatTableDataSource<Schedule>([]);
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
 
-    this.http.get<Schedule[]>(`${environment.apiUrl}/schedules`).subscribe(data => {
-      this.dataSource.data = data;
+    this.loadSchedules();
+
+    this.scheduleService.refreshTable$.subscribe(() => {
+      this.loadSchedules();
     });
 
     this.dataSource.filterPredicate = (data: Schedule, filter: string) => {
@@ -47,6 +49,12 @@ export class SchedulesTableComponent implements AfterViewInit {
         data.endAt.toString().toLowerCase().includes(normalizedFilter)
       );
     };
+  }
+
+  loadSchedules(): void {
+    this.http.get<Schedule[]>(`${environment.apiUrl}/schedules`).subscribe((data) => {
+      this.dataSource.data = data;
+    });
   }
 
   applyFilter(event: Event) {
