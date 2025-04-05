@@ -66,7 +66,8 @@ Este é um sistema de agendamento desenvolvido para gerenciar clientes e horári
   - Tabelas roláveis horizontalmente em dispositivos móveis.
 
 ## Referências
-- [Protítipo do projeto](https://www.canva.com/design/DAGja4orYJs/rzQXjYmECwwiZGkPd8R18w/edit?utm_content=DAGja4orYJs&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+- [Protótipo do projeto](https://www.canva.com/design/DAGja4orYJs/rzQXjYmECwwiZGkPd8R18w/edit?utm_content=DAGja4orYJs&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 - [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli)
+- [Angular Material](https://material.angular.io/)
 - [Spring Boot Documentation](https://spring.io/projects/spring-boot)
 - [MySQL Documentation](https://dev.mysql.com/doc/)
