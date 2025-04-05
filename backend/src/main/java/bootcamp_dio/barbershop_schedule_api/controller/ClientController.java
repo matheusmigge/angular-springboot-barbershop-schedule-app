@@ -1,5 +1,6 @@
 package bootcamp_dio.barbershop_schedule_api.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,7 +45,12 @@ public class ClientController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteClient(@PathVariable Long id) {
-        clientService.deleteClient(id);
+    public ResponseEntity<Void> deleteClient(@PathVariable Long id) {
+        try {
+            clientService.deleteClientAndSchedules(id);
+            return ResponseEntity.ok().build(); // Retorna apenas o código HTTP 200
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).build(); // Retorna apenas o código HTTP 404
+        }
     }
 }

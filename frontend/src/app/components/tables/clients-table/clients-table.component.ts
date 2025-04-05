@@ -47,14 +47,18 @@ export class TableComponent implements AfterViewInit {
   }
 
   deleteClient(client: Client) {
-    if (confirm(`Tem certeza de que deseja excluir o cliente "${client.name}"?`)) {
+    if (confirm(`Tem certeza de que deseja excluir o cliente "${client.name}" e todos os seus agendamentos?`)) {
       this.http.delete(`${environment.apiUrl}/clients/${client.id}`).subscribe({
         next: () => {
-          alert('Cliente excluído com sucesso!');
+          alert('Cliente e seus agendamentos foram excluídos com sucesso!');
           this.loadClients();
         },
-        error: () => {
-          alert('Erro ao excluir o cliente.');
+        error: (err) => {
+          if (err.status === 404) {
+            alert('Erro: Cliente não encontrado.');
+          } else {
+            alert('Erro ao excluir o cliente.');
+          }
         },
       });
     }
